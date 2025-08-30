@@ -1,0 +1,14 @@
+
+bin/
+obj/
+out/
+dist/
+**/local.settings.json
+**/secrets.json
+**/appsettings.Development.json
+.vscode/
+node_modules/
+__pycache__/
+.devcontainer/.env
+_azurite/
+.DS_Store

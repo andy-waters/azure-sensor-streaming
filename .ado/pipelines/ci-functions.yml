@@ -1,0 +1,17 @@
+
+trigger:
+  paths: { include: [ src/functions/**, tests/** ] }
+pr:
+  paths: { include: [ src/functions/**, tests/** ] }
+
+pool: { vmImage: ubuntu-latest }
+
+steps:
+- task: UseDotNet@2
+  inputs: { packageType: 'sdk', version: '8.x' }
+- task: DotNetCoreCLI@2
+  displayName: 'Restore Functions'
+  inputs: { command: 'restore', projects: 'src/functions/*.csproj' }
+- task: DotNetCoreCLI@2
+  displayName: 'Build Functions'
+  inputs: { command: 'build', projects: 'src/functions/*.csproj', arguments: '-c Release --no-restore' }

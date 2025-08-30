@@ -1,0 +1,17 @@
+
+trigger:
+  paths: { include: [ src/api/**, tests/** ] }
+pr:
+  paths: { include: [ src/api/**, tests/** ] }
+
+pool: { vmImage: ubuntu-latest }
+
+steps:
+- task: UseDotNet@2
+  inputs: { packageType: 'sdk', version: '8.x' }
+- script: dotnet restore src/api
+  displayName: Restore
+- script: dotnet build src/api -c Release --no-restore
+  displayName: Build
+- script: dotnet test tests/unit -c Release --no-build --collect:"XPlat Code Coverage"
+  displayName: Test

@@ -1,0 +1,30 @@
+
+trigger: none
+pr: none
+
+stages:
+- stage: Infra_Dev
+  displayName: 'Infra Dev'
+  jobs:
+  - job: deploy_bicep
+    pool: { vmImage: ubuntu-latest }
+    steps:
+    - template: ../templates/deploy-bicep.yml
+      parameters:
+        resourceGroup: '$(RG_DEV)'
+        templateFile: 'infra/main.bicep'
+        parameters: |
+          env=dev
+          sqlAdminPass=$(SQL_ADMIN_PASS)
+
+- stage: App_Dev
+  dependsOn: Infra_Dev
+  jobs:
+  - job: deploy_api_dev
+    pool: { vmImage: ubuntu-latest }
+    steps:
+    - script: echo "Deploy API to dev (placeholder)"
+  - job: deploy_fn_dev
+    pool: { vmImage: ubuntu-latest }
+    steps:
+    - script: echo "Deploy Functions to dev (placeholder)"

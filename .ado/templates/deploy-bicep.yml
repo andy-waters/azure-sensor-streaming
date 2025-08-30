@@ -1,0 +1,23 @@
+
+parameters:
+  resourceGroup: ''
+  templateFile: ''
+  parameters: ''
+
+steps:
+- task: AzureCLI@2
+  displayName: 'what-if'
+  inputs:
+    azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az deployment group what-if         -g ${{ parameters.resourceGroup }}         -f ${{ parameters.templateFile }}         -p ${{ parameters.parameters }}
+- task: AzureCLI@2
+  displayName: 'deploy'
+  inputs:
+    azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az deployment group create         -g ${{ parameters.resourceGroup }}         -f ${{ parameters.templateFile }}         -p ${{ parameters.parameters }}
