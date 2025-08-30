@@ -1,7 +1,7 @@
 
 # azure-sensor-streaming
 
-*** azure-sensor-streaming ***  is an end-to-end reference for real-time data engineering on Azure. It streams temperature and humidity readings into Azure Event Hubs, processes them with Azure Functions (.NET 8), stores curated records in Azure SQL, and exposes query endpoints through a .NET 8 Minimal API (optionally fronted by API Management). The project is production-shaped—Bicep for infrastructure, Azure DevOps multi-stage pipelines for CI/CD, Key Vault for secrets, and Application Insights for observability—while remaining easy to run locally via a shared devcontainer, Azurite, and Azure SQL Edge.
+***azure-sensor-streaming***  is an end-to-end reference for real-time data engineering on Azure. It streams temperature and humidity readings into Azure Event Hubs, processes them with Azure Functions (.NET 8), stores curated records in Azure SQL, and exposes query endpoints through a .NET 8 Minimal API (optionally fronted by API Management). The project is production-shaped—Bicep for infrastructure, Azure DevOps multi-stage pipelines for CI/CD, Key Vault for secrets, and Application Insights for observability—while remaining easy to run locally via a shared devcontainer, Azurite, and Azure SQL Edge.
 
 ## Event schema
 ```json
