@@ -1,0 +1,15 @@
+[Unit]
+Description=Azure Sensor Sender
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/azure-sensor-streaming/devices/pi-sender
+EnvironmentFile=/home/pi/azure-sensor-streaming/devices/pi-sender/.env
+ExecStart=/home/pi/azure-sensor-streaming/devices/pi-sender/.venv/bin/python sender.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
