@@ -15,10 +15,6 @@ EH_NAME = os.getenv("EVENTHUB_NAME", "events")
 DEVICE_ID = os.getenv("DEVICE_ID", "pi-temp-sensor-001")
 SEND_INTERVAL = float(os.getenv("SEND_INTERVAL_SECS", "5"))
 
-TEMP_BASE = float(os.getenv("TEMP_BASE_C", "22.0"))
-TEMP_JITTER = float(os.getenv("TEMP_JITTER_C", "3.0"))
-HUM_BASE = float(os.getenv("HUMID_BASE_PCT", "55.0"))
-HUM_JITTER = float(os.getenv("HUMID_JITTER_PCT", "10.0"))
 
 def read_temp_humidity():
     dht_device = adafruit_dht.DHT11(board.D4)  # Alternative naming
