@@ -9,6 +9,9 @@ Sends JSON telemetry to Azure Event Hubs in the schema:
 ## Quick start (Pi or any Linux/macOS with Python 3.11+)
 
 ```bash
+apt-get update && apt-get install -y --no-install-recommends 
+    gcc python3-dev libgpiod2 libgpiod-dev i2c-tools
+
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env    # fill in values
@@ -19,8 +22,17 @@ python sender.py        # Ctrl+C to stop
 ## Docker (multi-arch; works on Pi)
 
 ```bash
-docker build -t sensor-sender:latest .
-docker run --rm --env-file .env sensor-sender:latest
+docker buildx build --platform linux/arm64 -t sensor-sender:latest --load .
+
+docker run --rm -it \
+  --privileged \
+  --device /dev/gpiomem \
+  --device /dev/i2c-1 \
+  -v /sys:/sys \
+  -v /dev:/dev \
+  -e BLINKA_FORCECHIP=BCM2XXX \
+  -e BLINKA_FORCEBOARD=RASPBERRY_PI_5 \
+  sender-sensor:latest
 ```
 
 ## Systemd (optional, auto-start on boot)

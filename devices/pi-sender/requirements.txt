@@ -1,2 +1,8 @@
 azure-eventhub==5.12.0
 python-dotenv==1.0.1
+board
+RPi.GPIO
+Adafruit-Blinka 
+adafruit-circuitpython-dht
+lgpio
+
